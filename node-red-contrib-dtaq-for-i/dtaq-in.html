@@ -1,0 +1,48 @@
+<script type="text/javascript">
+    RED.nodes.registerType('dtaq-in',{
+        category: 'IBM i',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            queue: {value:""},
+            library: {value:""},
+            length: {value:1024},
+            wait: {value:60}
+        },
+        inputs:0,
+        outputs:1,
+        icon: "arrow-in.png",
+        label: function() {
+            return this.name||"dtaq-in";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="dtaq-in">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-queue"><i class="icon-tag"></i> Queue</label>
+        <input type="text" id="node-input-queue" placeholder="Queue">
+    </div>
+    <div class="form-row">
+        <label for="node-input-library"><i class="icon-tag"></i> Library</label>
+        <input type="text" id="node-input-library" placeholder="Library">
+    </div>
+    <div class="form-row">
+        <label for="node-input-length"><i class="icon-tag"></i> Queue Length</label>
+        <input type="number" id="node-input-length" placeholder="Queue length">
+    </div>
+    <div class="form-row">
+        <label for="node-input-wait"><i class="icon-tag"></i> Wait Time</label>
+        <input type="number" id="node-input-wait" placeholder="Wait time">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="dtaq-in">
+    <p>Read from IBM i *DTAQ object using QSYS2.RECEIVE_DATA_QUEUE.</p>
+    <p>MESSAGE_DATA output as msg.payload
+    </p>
+</script>

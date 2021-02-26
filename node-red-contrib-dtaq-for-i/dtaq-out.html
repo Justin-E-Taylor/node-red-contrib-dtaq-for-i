@@ -1,0 +1,38 @@
+<script type="text/javascript">
+    RED.nodes.registerType('dtaq-out',{
+        category: 'IBM i',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+            queue: {value:""},
+            library: {value:""}
+        },
+        inputs:1,
+        outputs:0,
+        icon: "arrow-in.png",
+        label: function() {
+            return this.name||"dtaq-out";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="dtaq-out">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-queue"><i class="icon-tag"></i> Queue</label>
+        <input type="text" id="node-input-queue" placeholder="Queue">
+    </div>
+    <div class="form-row">
+        <label for="node-input-library"><i class="icon-tag"></i> Library</label>
+        <input type="text" id="node-input-library" placeholder="Library">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="dtaq-out">
+    <p>Write to IBM i *DTAQ object using QSYS2.SEND_DATA_QUEUE.</p>
+    <p>msg.payload sent to MESSAGE_DATA
+    msg.key_data sent to KEY_DATA</p>
+</script>

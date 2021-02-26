@@ -1,0 +1,22 @@
+{
+	"name": "dtaq-for-i",
+	"version": "1.0.0",
+	"description": "Input/output nodes for processing new *DTAQ messages",
+	"main": "index.js",
+	"scripts": {
+	  "test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+	  "DTAQ",
+	  "IBM i"
+	],
+	"author": "justin",
+	"license": "Apache-2.0",
+	"node-red" : {
+        "nodes": {
+            "dtaq in": "dtaq-in.js",
+			"dtaq out": "dtaq-out.js"
+        }
+    }
+  }
+  
