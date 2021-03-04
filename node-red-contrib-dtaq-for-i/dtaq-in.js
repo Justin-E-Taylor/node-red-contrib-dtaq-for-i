@@ -67,6 +67,8 @@ module.exports = function (RED) {
                                     });
                                 }
                             }
+                            statement.closeCursor();
+                            statement.close();
                             setTimeout(checkForMessage, 1000);
                         });
                     });
