@@ -13,7 +13,8 @@ module.exports = function (RED) {
         const messageDataLength = (isNaN(config.length) || config.length == '' ? 1024 : config.length);
         const sql = `select cast(MESSAGE_DATA as varChar(${messageDataLength})) as Message \
                         from table(QSYS2.RECEIVE_DATA_QUEUE(\
-                            DATA_QUEUE => ?,DATA_QUEUE_LIBRARY => ?,WAIT_TIME => ?))`;
+                            DATA_QUEUE => ?,DATA_QUEUE_LIBRARY => ?,WAIT_TIME => ?)) \
+                            fetch first 1 row only`;
         const params = [config.queue, config.library, config.wait];
 
         let state = { isClosed: false };
