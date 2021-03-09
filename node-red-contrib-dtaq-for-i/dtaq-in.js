@@ -8,7 +8,7 @@ module.exports = function (RED) {
         const d = new Date().toISOString();
         node.log(`dtaq-in node ${d} - ${node.id} created.`);
 
-        const connection = new dbconn();
+        let connection = new dbconn();
         connection.conn('*LOCAL');
         const messageDataLength = (isNaN(config.length) || config.length == '' ? 1024 : config.length);
         const sql = `select cast(MESSAGE_DATA as varChar(${messageDataLength})) as Message \
@@ -21,10 +21,8 @@ module.exports = function (RED) {
 
 
         node.on("close", function (done) {
-            node.log(`Closing dtaq-in node ${d} - ${node.id}`);
+            node.log(`Closing node ${d} - ${node.id}`);
             state.isClosed = true;
-            statement.closeCursor();
-            statement.close();
             connection.disconn();
             connection.close();
             done();
@@ -32,6 +30,11 @@ module.exports = function (RED) {
 
 
         const checkForMessage = function () {
+            if (state.isClosed == true) {
+                connection = new dbconn();
+                connection.conn('*LOCAL');
+                state.isClosed = false;
+            }
             const statement = new dbstmt(connection);
             statement.prepare(sql, (error) => {
                 if (error) {
@@ -66,6 +69,9 @@ module.exports = function (RED) {
                                     node.send({
                                         payload: msg
                                     });
+                                }
+                                else {
+                                    node.log(`msg==${JSON.parse(row)}`);
                                 }
                             }
                             statement.closeCursor();
